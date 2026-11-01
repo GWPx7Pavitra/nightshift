@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Options · Nightshift</title>
+  <link rel="icon" href="icons/32.png" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/options.css" />
+</head>
+<body>
+  <div class="backdrop dimmed" id="backdrop"></div>
+  <div class="layout">
+    <aside class="side reveal" style="--i:0">
+      <div class="brand"><img src="icons/48.png" width="34" height="34" alt="" /><div><b>Nightshift</b><span class="small dim" id="ver"></span></div></div>
+      <nav id="nav">
+        <a href="#customise">Customise</a>
+        <a href="#general">General</a>
+        <a href="#pages">Important pages</a>
+        <a href="#tracking">Screen time</a>
+        <a href="#categories">Categories</a>
+        <a href="#limits">Daily limits</a>
+        <a href="#sync">Sync browsers</a>
+        <a href="#dev">Dev card</a>
+        <a href="#weather">Weather</a>
+        <a href="#servers">Servers</a>
+        <a href="#updates">Updates</a>
+        <a href="#data">Data</a>
+      </nav>
+      <a class="btn sm" href="newtab.html">Open new tab</a>
+    </aside>
+
+    <main>
+      <section class="card welcome reveal" id="welcome" style="--i:1" hidden>
+        <h2><span class="serif">Welcome,</span> you’re set up.</h2>
+        <p class="muted">Nightshift is now your new tab page and is tracking time per website in the background. A few quick extras:</p>
+        <ol>
+          <li>Make it your <b>startup page</b> too: <button class="link accent" id="openStartup">open startup settings</button> and choose <i>Open the New Tab page</i>.</li>
+          <li>Pin the extension: click the puzzle icon in the toolbar → pin <b>Nightshift</b> to see your time on each site.</li>
+          <li>Using Chrome <i>and</i> Brave? Set up <a class="link accent" href="#sync">Sync browsers</a> below in both.</li>
+        </ol>
+      </section>
+
+      <section class="card reveal" id="general" style="--i:2">
+        <h2>General</h2>
+        <div class="field"><label for="name">Your name</label><input class="input" id="name" maxlength="40" /></div>
+        <div class="field"><label for="engine">Search engine</label>
+          <select class="input" id="engine"><option value="google">Google</option><option value="brave">Brave Search</option><option value="ddg">DuckDuckGo</option><option value="bing">Bing</option></select>
+        </div>
+      </section>
+
+      <section class="card reveal custom" id="customise" style="--i:2">
+        <div class="cz-head"><h2>Customise <span class="serif">your new tab</span></h2><span class="small dim" id="czSaved"></span></div>
+        <div class="pv-wrap" id="pvWrap">
+          <div class="pv-frame" id="pvFrame"><iframe id="pvIframe" tabindex="-1" title="Live preview"></iframe></div>
+          <div class="pv-bar small dim"><span class="live-dot"></span>Live preview <a class="link" href="newtab.html" target="_blank">open a new tab <i data-icon="external" data-size="12"></i></a></div>
+        </div>
+
+        <div class="seg tabs" id="czTabs" role="tablist">
+          <span class="seg-ind"></span>
+          <button role="tab" data-tab="clock" aria-selected="true">Clock</button>
+          <button role="tab" data-tab="type">Fonts</button>
+          <button role="tab" data-tab="colour">Colour</button>
+          <button role="tab" data-tab="bg">Background</button>
+          <button role="tab" data-tab="cards">Cards</button>
+          <button role="tab" data-tab="layout">Layout</button>
+        </div>
+
+        <div class="cz-panel" data-panel="clock">
+          <div class="field"><label>Style</label><div class="style-grid" id="styleGrid"></div></div>
+          <div class="field"><label>Clock font</label><div class="font-grid" id="clockFonts"></div></div>
+          <div class="field two">
+            <div><label for="clockWeight">Weight <b class="val" id="clockWeightV"></b></label><input type="range" class="range" id="clockWeight" min="100" max="900" step="50" /></div>
+            <div><label for="clockSize">Size <b class="val" id="clockSizeV"></b></label><input type="range" class="range" id="clockSize" min="0.6" max="1.5" step="0.05" /></div>
+          </div>
+          <div class="field"><label>Colour</label><div class="seg pills" id="clockColor">
+            <button data-v="solid">Solid</button><button data-v="accent">Accent</button><button data-v="gradient">Gradient</button><button data-v="outline">Outline</button><button data-v="glow">Glow</button>
+          </div></div>
+          <div class="field toggle"><div><b>24-hour clock</b></div><label class="switch"><input type="checkbox" id="clock24" /><span></span></label></div>
+          <div class="field toggle"><div><b>Show seconds</b></div><label class="switch"><input type="checkbox" id="showSeconds" /><span></span></label></div>
+          <div class="field toggle"><div><b>Show the date</b></div><label class="switch"><input type="checkbox" id="showDate" /><span></span></label></div>
+        </div>
+
+        <div class="cz-panel" data-panel="type" hidden>
+          <div class="field"><label>Interface font <span class="dim">(every Nightshift page)</span></label><div class="font-grid ui" id="uiFonts"></div></div>
+        </div>
+
+        <div class="cz-panel" data-panel="colour" hidden>
+          <div class="field"><label>Accent colour</label>
+            <div class="swatches" id="swatches">
+              <button data-accent="emerald" style="--c:#34d399" aria-label="Emerald"></button>
+              <button data-accent="violet" style="--c:#a78bfa" aria-label="Violet"></button>
+              <button data-accent="sky" style="--c:#38bdf8" aria-label="Sky"></button>
+              <button data-accent="amber" style="--c:#fbbf24" aria-label="Amber"></button>
+              <button data-accent="rose" style="--c:#fb7185" aria-label="Rose"></button>
+              <label class="custom-sw" id="customSw" title="Any colour"><input type="color" id="accentHex" /><span></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="cz-panel" data-panel="bg" hidden>
+          <div class="bg-grid" id="bgGrid">
+            <button data-bg="aurora"><span class="pv pv-aurora"></span>Aurora<small>animated</small></button>
+            <button data-bg="stars"><span class="pv pv-stars"></span>Night sky<small>animated</small></button>
+            <button data-bg="bing"><span class="pv pv-bing"></span>Photo of the day<small>from Bing, changes daily</small></button>
+            <button data-bg="custom"><span class="pv pv-custom" id="pvCustom"></span>Your image<small id="customHint">upload one</small></button>
+          </div>
+          <input type="file" id="bgFile" accept="image/*" hidden />
+          <div class="field"><label for="dim">Darken <b class="val" id="dimV"></b></label><input type="range" class="range" id="dim" min="0" max="70" step="5" /></div>
+          <div class="field toggle"><div><b>Film grain</b></div><label class="switch"><input type="checkbox" id="grain" /><span></span></label></div>
+        </div>
+
+        <div class="cz-panel" data-panel="cards" hidden>
+          <div class="field two">
+            <div><label for="glass">Card opacity <b class="val" id="glassV"></b></label><input type="range" class="range" id="glass" min="10" max="95" step="5" /></div>
+            <div><label for="blur">Blur <b class="val" id="blurV"></b></label><input type="range" class="range" id="blur" min="0" max="48" step="2" /></div>
+          </div>
+          <div class="field"><label for="radius">Corners <b class="val" id="radiusV"></b></label><input type="range" class="range" id="radius" min="6" max="32" step="1" /></div>
+          <div class="field"><label>Density</label><div class="seg pills" id="density"><button data-v="comfy">Comfortable</button><button data-v="compact">Compact</button></div></div>
+          <div class="field"><label>Motion</label><div class="seg pills" id="motion"><button data-v="full">Full</button><button data-v="calm">Calm</button><button data-v="off">Off</button></div></div>
+        </div>
+
+        <div class="cz-panel" data-panel="layout" hidden>
+          <div class="field"><label>Layout</label><div class="layout-grid" id="layoutGrid">
+            <button data-v="dashboard"><span class="lp lp-dash"><i></i><i></i><i></i><i></i></span>Dashboard<small>everything</small></button>
+            <button data-v="focus"><span class="lp lp-focus"><i></i><i></i><i></i></span>Focus<small>clock, search, pages</small></button>
+            <button data-v="zen"><span class="lp lp-zen"><i></i></span>Zen<small>just the time</small></button>
+          </div></div>
+          <div class="field"><label>Show on the new tab</label><div class="widget-grid" id="widgets"></div></div>
+        </div>
+        <div class="row cz-foot"><button class="btn sm" id="czReset">Reset the look</button></div>
+      </section>
+
+      <section class="card reveal" id="pages" style="--i:4">
+        <h2>Important pages</h2>
+        <p class="muted small">Shown on your new tab. Drag to reorder. You can also add the page you’re on from the toolbar popup or by right-clicking any page.</p>
+        <ul class="list" id="linkList"></ul>
+        <button class="btn sm" id="addLink"><i data-icon="plus" data-size="14"></i>Add page</button>
+      </section>
+
+      <section class="card reveal" id="tracking" style="--i:5">
+        <h2>Screen time</h2>
+        <div class="field toggle"><div><b>Track time per website</b><p class="small muted">Only the tab you’re actively using counts. Stored on this device (and in your sync gist, if on).</p></div><label class="switch"><input type="checkbox" id="trackOn" /><span></span></label></div>
+        <div class="field toggle"><div><b>Count tabs playing audio</b><p class="small muted">Keeps counting a YouTube video or music while you’re away from the keyboard or in another app.</p></div><label class="switch"><input type="checkbox" id="countAudible" /><span></span></label></div>
+        <div class="field toggle"><div><b>Show today’s time on the toolbar icon</b></div><label class="switch"><input type="checkbox" id="badge" /><span></span></label></div>
+        <div class="field"><label for="idleSec">Stop counting after no activity for</label>
+          <select class="input" id="idleSec"><option value="30">30 seconds</option><option value="60">1 minute</option><option value="120">2 minutes</option><option value="300">5 minutes</option></select>
+        </div>
+        <div class="field"><label for="excluded">Never track these sites (one per line)</label><textarea class="input" id="excluded" rows="4" placeholder="bank.example.com"></textarea></div>
+      </section>
+
+      <section class="card reveal" id="categories" style="--i:5">
+        <h2>Categories</h2>
+        <div class="field"><label>Your categories <span class="dim">— productive ones count toward “productive time”</span></label>
+          <ul class="list cats-def" id="catDefs"></ul>
+          <div class="row grow new-cat"><input type="color" class="cpick" id="ncColor" value="#22d3ee" aria-label="Colour" /><input class="input" id="ncName" maxlength="20" placeholder="New category, e.g. Gym, Design, Reading" /><label class="small muted chk"><input type="checkbox" id="ncProd" /> productive</label><button class="btn sm primary" id="ncAdd"><i data-icon="plus" data-size="14"></i>Add</button></div>
+        </div>
+        <p class="muted small">Your most-visited sites from the last 30 days. Change any of them; subdomains follow (setting <span class="mono">google.com</span> covers <span class="mono">mail.google.com</span> unless that has its own).</p>
+        <ul class="list cat-list" id="catList"></ul>
+        <div class="row grow"><input class="input" id="catDomain" placeholder="Add a site, e.g. leetcode.com" /><select class="input sel" id="catNew"></select><button class="btn sm" id="catAdd">Add</button></div>
+      </section>
+
+      <section class="card reveal" id="limits" style="--i:5">
+        <h2>Daily limits</h2>
+        <p class="muted small">Nothing gets blocked. When you pass a limit you get one notification that day and the toolbar badge turns red. Limits count all your browsers together.</p>
+        <ul class="list lim-list" id="limList"></ul>
+        <div class="row grow"><input class="input" id="limDomain" placeholder="Site, e.g. youtube.com" /><input class="input num" id="limMins" type="number" min="5" max="1440" step="5" placeholder="min" /><button class="btn sm" id="limAdd">Add limit</button></div>
+      </section>
+
+      <section class="card reveal" id="sync" style="--i:6">
+        <h2>Sync browsers <span class="lock"><i data-icon="lock" data-size="13"></i>end-to-end encrypted</span></h2>
+        <p class="muted">Chrome and Brave don’t share extension data, so Nightshift syncs them for you. Everything is <b>encrypted in your browser with your passphrase</b> before it leaves, so the server or GitHub only ever sees scrambled data. Screen time from every browser adds up; to-dos, notes, the one thing, pages, categories, limits and your look follow you.</p>
+        <div id="syncOff">
+          <div class="seg pills mode-pick" id="syncMode"><button data-v="server" aria-pressed="true"><i data-icon="sparkle" data-size="14"></i>Your server · live</button><button data-v="gist" aria-pressed="false">GitHub Gist · every 10–30 min</button></div>
+          <ol class="steps" data-mode="server">
+            <li>Run the Nightshift sync server (it’s in the <span class="mono">server/</span> folder, see its README) and open its address once to check it says <span class="mono">ok</span>.</li>
+            <li><input class="input mono" id="srvUrl" placeholder="https://sync.cre8ivize.com" spellcheck="false" autocomplete="off" /></li>
+            <li><input class="input mono" id="srvToken" type="password" placeholder="Server token: ns_… (printed when the server first starts)" autocomplete="off" /></li>
+            <li><input class="input" id="srvPass" type="password" placeholder="Passphrase (8+ characters) — the same one in every browser" autocomplete="new-password" />
+              <span class="small muted block">If you used Gist sync before, use the same passphrase you had there or a new one; your history comes along either way.</span></li>
+            <li><button class="btn primary" id="srvConnect">Connect &amp; encrypt</button></li>
+          </ol>
+          <ol class="steps" data-mode="gist" hidden>
+            <li><a class="btn sm" id="mkToken" href="https://github.com/settings/tokens/new?scopes=gist&amp;description=Nightshift%20sync" target="_blank" rel="noopener">Create a GitHub token <i data-icon="external" data-size="13"></i></a><span class="small muted">The <b>gist</b> box is pre-ticked. Tick <b>repo</b> too if you want the Dev card to see your private repos.</span></li>
+            <li><input class="input mono" id="token" type="password" placeholder="GitHub token: ghp_…" autocomplete="off" /></li>
+            <li><input class="input" id="pass" type="password" placeholder="Passphrase (8+ characters) — the same one in every browser" autocomplete="new-password" />
+              <span class="small muted block">Not your GitHub password. Nightshift never uploads it; if you forget it, reconnect with a new one and start fresh.</span></li>
+            <li><button class="btn primary" id="connect">Connect &amp; encrypt</button></li>
+          </ol>
+          <p class="small muted">In your other browser: install Nightshift, then enter the same details and passphrase.</p>
+        </div>
+        <div id="syncOn" hidden>
+          <div class="sync-status"><span class="chip" id="syncChip"><span class="dot"></span><span class="lbl"></span></span><span class="small muted" id="syncWhen"></span></div>
+          <p class="err small" id="syncErr" hidden></p>
+          <p class="note small" id="syncNote" hidden></p>
+          <div id="reconnect" hidden>
+            <div class="row grow"><input class="input" id="pass2" type="password" placeholder="Passphrase" autocomplete="new-password" /><button class="btn primary" id="reconnectBtn">Set passphrase</button></div>
+          </div>
+          <div class="upgrade" id="upgradeLive" hidden>
+            <div><b>Make it live</b><p class="small muted">Gist sync updates every 10–30 minutes, so your browsers can show different numbers. Your own sync server updates within seconds.</p></div>
+            <button class="btn sm primary" id="goLive">Switch to your server</button>
+          </div>
+          <div class="field"><label for="label">This browser is called</label><input class="input" id="label" maxlength="20" /></div>
+          <div class="field"><label>Browsers in sync <span class="dim">— remove old installs you don’t use any more</span></label><ul class="list plain" id="syncList"></ul></div>
+          <div class="row"><button class="btn sm primary" id="syncNow">Sync now</button><a class="btn sm" id="gistLink" target="_blank" rel="noopener">View gist <i data-icon="external" data-size="13"></i></a><button class="btn sm danger" id="disconnect">Disconnect</button></div>
+        </div>
+      </section>
+
+      <section class="card reveal" id="dev" style="--i:7">
+        <h2>Dev card</h2>
+        <p class="muted small">Shows CI status on the default branch, the latest commit and open pull requests, plus how long you spent in each repo on GitHub this week.</p>
+        <div class="field"><label for="repos">Repositories (owner/repo, one per line)</label><textarea class="input" id="repos" rows="3" spellcheck="false"></textarea></div>
+        <div class="field"><label for="ghToken">GitHub token for repos <span class="dim">(optional — uses your sync token if empty; needs <b>repo</b> scope for private repos)</span></label>
+          <div class="row grow"><input class="input mono" id="ghToken" type="password" placeholder="ghp_…" autocomplete="off" /><a class="btn sm" href="https://github.com/settings/tokens/new?scopes=repo&amp;description=Nightshift%20dev%20card" target="_blank" rel="noopener">Create <i data-icon="external" data-size="13"></i></a></div>
+          <span class="small muted" id="ghState"></span>
+        </div>
+      </section>
+
+      <section class="card reveal" id="weather" style="--i:7">
+        <h2>Weather</h2>
+        <div class="field toggle"><div><b>Show weather under the clock</b><p class="small muted">From Open-Meteo, no account needed.</p></div><label class="switch"><input type="checkbox" id="wxOn" /><span></span></label></div>
+        <div class="field"><label for="city">City <span class="dim">(leave empty to use your location)</span></label>
+          <div class="row grow"><input class="input" id="city" placeholder="Search a city…" autocomplete="off" /><button class="btn sm" id="cityClear">Use my location</button></div>
+          <ul class="list plain city-results" id="cityResults"></ul>
+        </div>
+        <div class="field toggle"><div><b>Fahrenheit</b></div><label class="switch"><input type="checkbox" id="wxF" /><span></span></label></div>
+      </section>
+
+      <section class="card reveal" id="servers" style="--i:7">
+        <h2>Servers</h2>
+        <p class="muted small">Health checks shown in the top bar of your new tab. <span class="mono">*.cre8ivize.com</span> report real HTTP status; other hosts report reachable or down.</p>
+        <ul class="list" id="monList"></ul>
+        <button class="btn sm" id="addMon"><i data-icon="plus" data-size="14"></i>Add server</button>
+      </section>
+
+      <section class="card reveal" id="updates" style="--i:8">
+        <h2>Updates <span class="lock" id="updVer"></span></h2>
+        <p class="muted small">Nightshift updates itself from your private GitHub repo. It rewrites only the files that changed, in the folder it runs from, then restarts. Your screen time, to-dos and settings stay exactly as they are.</p>
+        <div class="upd-status" id="updStatus"></div>
+        <div class="field two">
+          <div><label for="updRepo">Repository</label><input class="input mono" id="updRepo" placeholder="owner/repo" spellcheck="false" /></div>
+          <div><label for="updBranch">Branch</label><input class="input mono" id="updBranch" placeholder="main" spellcheck="false" /></div>
+        </div>
+        <div class="field"><label for="updDir">Folder inside the repo <span class="dim">(empty if manifest.json is at the top)</span></label><input class="input mono" id="updDir" placeholder="" spellcheck="false" /></div>
+        <div class="field"><label>Token</label><span class="small muted" id="updToken"></span></div>
+        <div class="field"><label>Extension folder on this computer</label>
+          <div class="row"><button class="btn sm" id="updPick"><i data-icon="folder" data-size="14"></i>Choose folder</button><span class="small muted" id="updFolder"></span></div>
+          <p class="small dim" id="updBrave" hidden>Brave turns folder access off by default. Open <span class="mono">brave://flags/#file-system-access-api</span>, set it to Enabled, relaunch, then choose the folder here.</p>
+        </div>
+        <div class="field toggle"><div><b>Install updates automatically</b><p class="small muted">Downloads in the background when you open a new tab, and restarts once you’ve left Nightshift’s pages. Choose “Allow on every visit” when Chrome asks, or it’ll ask again next time.</p></div><label class="switch"><input type="checkbox" id="updAuto" /><span></span></label></div>
+        <div class="row"><button class="btn sm" id="updCheck"><i data-icon="refresh" data-size="14"></i>Check now</button><button class="btn sm primary" id="updNow"><i data-icon="download" data-size="14"></i>Update now</button></div>
+        <p class="small muted upd-prog" id="updProg"></p>
+      </section>
+
+      <section class="card reveal" id="data" style="--i:8">
+        <h2>Data</h2>
+        <div class="row">
+          <button class="btn sm" id="export">Export everything</button>
+          <label class="btn sm">Import<input type="file" id="import" accept="application/json" hidden /></label>
+          <button class="btn sm danger" id="wipe">Clear screen-time history</button>
+        </div>
+        <p class="small muted" id="dataInfo"></p>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

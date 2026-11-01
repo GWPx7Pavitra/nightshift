@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Nightshift</title>
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/popup.css" />
+</head>
+<body>
+  <header class="ph">
+    <div class="brand"><img src="icons/32.png" width="20" height="20" alt="" /> Nightshift</div>
+    <div class="row">
+      <span class="chip status" id="sync" title="Sync"><span class="sic"></span><span class="lbl"></span></span>
+      <a class="icon-btn sm" id="opts" href="#" title="Options" aria-label="Options">
+        <i data-icon="sliders" data-size="16"></i>
+      </a>
+    </div>
+  </header>
+
+  <section class="site reveal" style="--i:0" id="site">
+    <img class="fav big-fav" id="siteFav" alt="" />
+    <div class="site-info">
+      <div class="dom" id="siteDom">—</div>
+      <div class="small muted" id="siteSub"></div>
+    </div>
+    <div class="site-time" id="siteTime">0m</div>
+    <select class="cat-select" id="siteCat" hidden aria-label="Category"></select>
+  </section>
+
+  <div class="limit reveal" style="--i:1" id="limitBox" hidden>
+    <div class="limit-h"><span>Daily limit</span><span class="small muted" id="limitUsed"></span></div>
+    <div class="bar" id="limitBar"><i></i></div>
+    <div class="limit-opts" id="limitOpts"></div>
+  </div>
+
+  <div class="actions reveal" style="--i:1">
+    <button class="btn sm" id="addPage"><i data-icon="plus" data-size="14"></i>Important page</button>
+    <button class="btn sm" id="ignore">Don’t track this site</button>
+  </div>
+
+  <section class="today reveal" style="--i:2">
+    <div class="card-h"><h2>Today</h2><span class="tot" id="total">0m</span></div>
+    <ol class="mini" id="top"></ol>
+  </section>
+
+  <footer class="pf reveal" style="--i:3">
+    <a class="btn sm primary" id="openST" href="#">Screen Time <i data-icon="right" data-size="14"></i></a>
+    <a class="btn sm" id="openTab" href="#">New tab</a>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

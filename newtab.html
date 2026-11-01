@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>New Tab</title>
+  <link rel="icon" href="icons/32.png" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/newtab.css" />
+</head>
+<body>
+  <div class="backdrop" id="backdrop"></div>
+
+  <header class="top">
+    <div class="reveal greet" style="--i:0">
+      <h1 class="hello"><span class="serif" id="hello">Hello,</span> <span id="name"></span></h1>
+    </div>
+    <div class="top-right reveal" style="--i:1">
+      <button class="chip clickable update-chip" id="updChip" hidden><i data-icon="download" data-size="14"></i><span class="lbl">Update</span></button>
+      <a class="chip clickable status-chip" id="syncChip" href="options.html#sync" title="Sync"><span class="sic"></span><span class="lbl">Sync</span></a>
+      <div class="pop-wrap status-chip">
+        <button class="chip clickable" id="srvChip" aria-expanded="false" aria-controls="srvPop"><span class="sic"><i data-icon="server" data-size="14"></i><span class="dot"></span></span><span class="lbl">Servers</span></button>
+        <div class="popover" id="srvPop" hidden>
+          <ul id="monitors" class="monitors"></ul>
+          <div class="row pop-foot"><span class="small dim" id="checkedAt"></span><button class="link" id="recheck">Recheck</button></div>
+        </div>
+      </div>
+      <a class="icon-btn" href="insights.html" title="Screen Time (s)" aria-label="Screen Time"><i data-icon="chart" data-size="18"></i></a>
+      <a class="icon-btn" href="options.html#customise" title="Customise (c)" aria-label="Customise"><i data-icon="palette" data-size="18"></i></a>
+      <a class="icon-btn" href="options.html" title="Options" aria-label="Options"><i data-icon="sliders" data-size="18"></i></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="clock reveal" style="--i:1" id="clock" aria-live="off"></div>
+      <p class="tagline reveal" style="--i:2"><span id="date"></span><span id="weather" class="weather" hidden></span><span id="late" class="late" hidden></span></p>
+      <form id="searchForm" class="search reveal" style="--i:3" autocomplete="off">
+        <i data-icon="search" data-size="18"></i>
+        <input id="q" type="text" placeholder="Search, or type a URL" aria-label="Search" />
+        <span id="bangHint" class="bang" hidden></span>
+        <button type="button" class="kbd-btn" id="openPal" title="Jump to tabs, pages, bookmarks, history">Ctrl K</button>
+      </form>
+      <div class="pages-wrap reveal" style="--i:4">
+        <nav id="pages" class="pages" aria-label="Important pages"></nav>
+        <div class="pages-tools" id="pagesTools">
+          <button class="pt-btn" id="addPage" type="button" title="Add a page (or drop a link on the row)"><i data-icon="plus" data-size="14"></i><span>Add</span></button>
+          <span class="pt-sep"></span>
+          <button class="pt-btn" id="editPages" type="button" title="Rearrange or remove"><i data-icon="sliders" data-size="14"></i><span>Edit</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="grid">
+      <div class="g-main">
+        <article class="card st reveal" style="--i:5" data-w="screen">
+          <header class="card-h"><h2>Screen time · today</h2><a class="link accent more" href="insights.html">Full report <i data-icon="right" data-size="13"></i></a></header>
+          <div class="st-body">
+            <div class="st-sum">
+              <div class="big" id="stTotal">0m</div>
+              <div class="small muted" id="stDelta"></div>
+              <div class="split" id="catBar"></div>
+              <div class="legend small" id="catLegend"></div>
+              <div class="bg-lane" id="bgLane" hidden></div>
+              <div class="small dim browsers-line" id="browserLine"></div>
+            </div>
+            <div>
+              <ol class="sites" id="stSites"></ol>
+              <div class="limits" id="limits" hidden>
+                <div class="sub-h"><span>Daily limits</span><a class="link" href="options.html#limits">edit</a></div>
+                <ul id="limitList"></ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="g-pair" id="pair">
+          <article class="card dev reveal" style="--i:7" data-w="dev">
+            <header class="card-h"><h2>Dev</h2><button class="link" id="devRefresh">Refresh</button></header>
+            <ul class="repos" id="repos"><li class="empty">Loading…</li></ul>
+          </article>
+
+          <article class="card week reveal" style="--i:8" data-w="week">
+            <header class="card-h"><h2>This week</h2><span class="chip" id="weekChip" hidden></span></header>
+            <ul class="recap" id="recap"></ul>
+            <div class="week-bars" id="week"></div>
+            <div class="small dim week-cap">Last 7 days, by category</div>
+          </article>
+        </div>
+
+        <article class="card notes reveal" style="--i:9" data-w="notes">
+          <header class="card-h"><h2>Notes</h2><span class="small dim" id="notesState"></span></header>
+          <textarea id="notes" spellcheck="false" placeholder="Ideas, links, bug notes…"></textarea>
+        </article>
+      </div>
+
+      <article class="card todo reveal" style="--i:6" id="todoCard">
+        <div class="one" id="one" data-w="one">
+          <div class="one-h"><span class="one-label">The one thing today</span><button class="link" id="oneClear" hidden>change</button></div>
+          <form id="oneForm"><input id="oneInput" class="one-input" maxlength="140" placeholder="What would make today a win?" /></form>
+          <div class="one-show" id="oneShow" hidden>
+            <button class="check big-check" id="oneCheck" type="button" aria-label="Mark done"></button>
+            <p class="one-text" id="oneText"></p>
+          </div>
+        </div>
+        <div class="todo-wrap" data-w="todo">
+          <header class="card-h"><h2>To-do</h2><span class="chip" id="todoCount" hidden></span></header>
+          <form id="todoForm" class="todo-form">
+            <input id="todoInput" class="input" type="text" maxlength="200" placeholder="Add a to-do and press Enter" />
+          </form>
+          <ul id="todos" class="todos"></ul>
+          <button class="link" id="clearDone" hidden>Clear completed</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div class="add-pop" id="addPop" hidden>
+    <form id="addForm">
+      <input class="input" name="url" placeholder="URL, e.g. github.com" required />
+      <input class="input" name="title" placeholder="Name (optional)" maxlength="24" />
+      <div class="row end"><button type="button" class="btn sm" id="addCancel">Cancel</button><button class="btn sm primary">Add</button></div>
+    </form>
+  </div>
+
+  <p class="credit" id="credit"></p>
+  <div class="upd-overlay" id="updOverlay" hidden><div class="upd-box"><span class="spinner"></span><span id="updMsg">Updating…</span></div></div>
+  <script type="module" src="newtab.js"></script>
+</body>
+</html>

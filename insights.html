@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Screen Time · Nightshift</title>
+  <link rel="icon" href="icons/32.png" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/insights.css" />
+</head>
+<body>
+  <div class="backdrop dimmed" id="backdrop"></div>
+  <main>
+    <header class="head reveal" style="--i:0">
+      <div>
+        <a class="link back" href="newtab.html"><i data-icon="left" data-size="13"></i>New tab</a>
+        <h1><span class="serif">Screen</span> Time</h1>
+        <p class="muted" id="sub">Where your browsing time actually goes.</p>
+      </div>
+      <div class="controls">
+        <div class="seg" id="range" role="tablist" aria-label="Range">
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button role="tab" data-r="1">Today</button>
+          <button role="tab" data-r="y">Yesterday</button>
+          <button role="tab" data-r="7">7 days</button>
+          <button role="tab" data-r="30">30 days</button>
+        </div>
+        <div class="row" id="browsers"></div>
+      </div>
+    </header>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="card reveal cats-card" style="--i:3">
+      <header class="card-h"><h2>By category</h2><span class="small dim">Click one to filter the list · change a site’s category from its chip</span></header>
+      <div class="cats" id="cats"></div>
+    </section>
+
+    <section class="card chart-card reveal" style="--i:4">
+      <header class="card-h">
+        <h2 id="chartTitle">By hour</h2>
+        <div class="row">
+          <div class="legend small" id="chartLegend"></div>
+          <div class="seg mini" id="colorBy"><span class="seg-ind" aria-hidden="true"></span><button data-c="cat">Category</button><button data-c="browser">Browser</button></div>
+        </div>
+      </header>
+      <div class="chart" id="chart"></div>
+    </section>
+
+    <section class="card reveal" style="--i:5">
+      <header class="card-h">
+        <h2>Websites <span class="chip" id="catFilter" hidden></span></h2>
+        <input class="input filter" id="filter" type="search" placeholder="Filter sites…" />
+      </header>
+      <ol class="table" id="table"></ol>
+      <button class="btn sm more" id="more" hidden>Show all</button>
+    </section>
+
+    <section class="card reveal bg-card" id="bgCard" style="--i:6" hidden>
+      <header class="card-h"><h2><i data-icon="music" data-size="14"></i> In the background</h2><span class="small dim"><b id="bgTotal"></b> · played while you worked on something else, not counted above</span></header>
+      <ul class="bg-list" id="bgList"></ul>
+    </section>
+
+    <p class="foot small dim" id="foot"></p>
+  </main>
+  <script type="module" src="insights.js"></script>
+</body>
+</html>

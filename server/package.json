@@ -1,0 +1,10 @@
+{
+  "name": "nightshift-sync",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Single-user live sync server for the Nightshift extension (stores encrypted blobs only).",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

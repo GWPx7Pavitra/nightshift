@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Nightshift",
+  "short_name": "Nightshift",
+  "version": "2.3.0",
+  "description": "A calm startup page with your to-dos and important pages, plus screen time per website with categories and limits, end-to-end encrypted sync across Chrome and Brave.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Nightshift",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "idle",
+    "alarms",
+    "favicon",
+    "contextMenus",
+    "notifications",
+    "bookmarks",
+    "history",
+    "geolocation"
+  ],
+  "host_permissions": [
+    "https://api.github.com/*",
+    "https://gist.githubusercontent.com/*",
+    "https://www.bing.com/*",
+    "https://api.open-meteo.com/*",
+    "https://geocoding-api.open-meteo.com/*",
+    "https://*.cre8ivize.com/*"
+  ],
+  "commands": {
+    "open-screen-time": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Open the Screen Time dashboard"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ]
+}
